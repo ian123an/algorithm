@@ -1,0 +1,28 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int LinearSearch(vector<int>& list, int size)
+{
+	for (int i = 0;i < list.size();i++)
+	{
+		if (list[i] == size)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+
+int main(int argc, char *argv[])
+{
+	vector<int> A;
+	int i, n, v;
+	for (cin >> i; i > 0; i--) 
+	{ 
+		cin >> n; 
+		A.push_back(n);
+	}
+	cin >> v;
+	cout << LinearSearch(A, v) << endl;
+}
