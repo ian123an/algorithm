@@ -1,0 +1,47 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int BinarySearch(vector<int>& list,int size) 
+{
+	int low = 0, high = list.size() - 1;
+	for (int i = 0; i < list.size(); i++)
+		cout << list[i] << " ";
+	cout << endl;
+
+	while (low <= high) 
+	{
+		int mid = low + (high - low) / 2;
+
+		if (list[mid] == size) 
+		{
+			cout << list[mid] << endl;
+			return list[mid];
+		}
+
+		if (list[mid]>size) 
+		{
+			high = mid - 1;
+		}
+		else 
+		{
+			low = mid + 1;
+		}
+		for (int i = low; i <= high; i++)
+			cout << list[i] << " ";
+		cout << endl;
+	}
+	return -1;
+}
+int main(int argc, char* argv[])
+{
+	vector<int> A;
+	int i, n, v;
+	for (cin >> i; i > 0; i--) 
+	{
+		cin >> n; 
+		A.push_back(n); 
+	}
+	cin >> v;
+	BinarySearch(A, v);
+}
