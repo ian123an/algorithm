@@ -1,0 +1,72 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <climits>
+using namespace std;
+void BuildHeap(vector<int> &A) 
+{
+	int n = A.size();
+	for (int i = n / 2 - 1; i >= 0; i--) 
+	{
+		int left, right, largest = -1;
+		while (largest != i) {
+			largest = i;
+			left = i * 2 + 1;
+			right = i * 2 + 2;
+			if (left < n && A[left] > A[largest])
+				largest = left;
+			if (right < n && A[right] > A[largest])
+				largest = right;
+			if (largest != i)
+				swap(A[i], A[largest]);
+		}
+	}
+}
+void HeapSort(vector<int> &A) 
+{
+	BuildHeap(A);
+	A.insert(A.begin(), 0);
+
+	for (int i = A.size() - 1; i > 0; i--) 
+	{
+		swap(A[i], A[1]);
+		for (int k = 1; k < A.size(); k++)
+			cout << A[k] << " ";
+		cout << endl;
+		int current = 1;
+		int tail = i;
+		while (current < tail) 
+		{
+			int left = current * 2;
+			int right = current * 2 + 1;
+			int largest = current;
+			if (left < tail && A[left]>A[largest])
+				largest = left;
+			if (right < tail && A[right] > A[largest])
+				largest = right;
+			if (largest != current) 
+			{
+				swap(A[current], A[largest]);
+				for (int k = 1; k < A.size(); k++)
+					cout << A[k] << " ";
+				cout << endl;
+				current = largest;
+			}
+			else
+				break;
+		}
+	}
+	A.erase(A.begin());
+}
+
+int main(int argc, char *argv[]) 
+{
+	vector<int> A;
+	int i, n;
+	for (cin >> i; i > 0; i--) 
+	{
+		cin >> n;
+		A.push_back(n);
+	}
+	HeapSort(A);
+}
