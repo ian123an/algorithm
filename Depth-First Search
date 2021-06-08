@@ -1,0 +1,54 @@
+#include <iostream>
+using namespace std;
+#define graph_size 21
+int G[graph_size][graph_size];
+int i;
+int N;
+int E;
+bool Visited[graph_size];
+void NewVisited()
+{ 
+	for (int i = 0; i < graph_size; i++)
+		Visited[i] = false;
+}
+void CreateGraph() 
+{
+	NewVisited();
+	cin >> N >> E >> i;
+	int v1, v2;
+
+	for (int j = 1; j <= N; j++) 
+		for (int k = 1; k <= N; k++)
+			G[j][k] = 0;
+	for (int j = 0; j < E; j++) 
+	{
+		cin >> v1 >> v2;
+		G[v1][v2] = G[v2][v1] = 1;
+	}
+}
+void PrintGraph() 
+{
+	for (int j = 1; j <= N; j++) 
+	{
+		for (int k = 1; k <= N; k++) 
+		{
+			cout << G[j][k] << " ";
+		}
+		cout << endl;
+	}
+}
+void DFS(int i) 
+{
+	Visited[i] = true;
+	cout << i << " ";
+	for (int j = 0; j <= N; j++) 
+	{
+		if (!Visited[j] && G[i][j])
+			DFS(j);
+	}
+}
+int main(int argc, char *argv[]) 
+{
+	CreateGraph();
+	DFS(i);
+}
